@@ -1,0 +1,110 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "0.0.1",
+		"title": "API Reference for app Only"
+	},
+	"host": "api.bar-gains.com:4003",
+	"basePath": "/",
+	"schemes": [
+		"http"
+	],
+	"securityDefinitions": {
+		"bearer": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header",
+			"description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
+		}
+	},
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"paths": {
+		"/getCartItems": {
+			"get": {
+				"tags": [
+					"Cart"
+				],
+				"summary": "Cart items",
+				"description": "Get cart items",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "itemsPerPage",
+						"in": "query",
+						"description": "Items per page",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "Page number",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Login",
+				"description": "Login",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "body",
+						"in": "body",
+						"description": "email and Password",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/login"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"login": {
+			"required": [
+				"email",
+				"password"
+			],
+			"properties": {
+				"email": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
